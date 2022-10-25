@@ -1,9 +1,14 @@
 from .models import User
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .models import Podcast
 
-class SignupForm(UserCreationForm):
+class PodcastForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2')
-
-    def save(self, commit=True)    
+        model = Podcast
+        field = [
+            'title',
+            'author_name',
+            'description',
+            'url'
+        ]
