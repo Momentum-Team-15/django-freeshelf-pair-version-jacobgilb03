@@ -1,10 +1,12 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 {% block content %}
 
-
+<h2>I love Podcasts</h2>
 {% for podcast in podcasts %}
     <div>
-        <h1></h1>
+        <h3>{{ podcast }}</h3>
+        <h4>{{ podcast.description }}</h4>
     </div>
+{% endfor %}
 
 {% endblock %}

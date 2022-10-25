@@ -23,6 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.list_podcasts, name='list_podcasts'),
-    path("private_place/", core_views.private_place),
     path("accounts/", include("django.contrib.auth.urls")),
 ]
