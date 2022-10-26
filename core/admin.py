@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import User, Podcast
+from .models import User, Podcast, Category
 
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Podcast)
+admin.site.register(Category)

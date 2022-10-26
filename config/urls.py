@@ -24,4 +24,8 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.list_podcasts, name='list_podcasts'),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('podcasts/favorites/', views.favorite_podcasts, name="favorite_podcasts"),
+    path('podcasts/favorite/add/<int:podcast_id>', views.add_favorite, name="add_favorite"),
+    path('podcasts/favorite/remove/<int:podcast_id>', views.remove_favorite, name="remove_favorite"),
+    # path('resources/comedy', views.list_categories, name="comedy")
 ]
