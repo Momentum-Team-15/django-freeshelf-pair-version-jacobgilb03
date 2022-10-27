@@ -1,9 +1,12 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+from django.template.defaultfilters import slugify
+from django.urls import reverse
+
 
 class User(AbstractUser):
-    favorite_podcasts = models.ManyToManyField('Podcast')
+    def __repr__(self):
+        pass
 
 class Podcast(models.Model):
     title = models.CharField(max_length=200)
@@ -16,8 +19,31 @@ class Podcast(models.Model):
     def __str__(self):
         return self.title
 
-class Category(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, max_length=50)
+    # @property
+    # def check_favorites(self, user):
+    #     favorite_podcasts = [favorite.resource for favorite in user.favorites]
+    #     if self in favorite_podcasts:
+    #         return True
 
-# class SlugField(max_length = 50, **options)
+class Category(models.Model):
+    title = models.CharField(max_length = 200, null=True)
+    slug = models.SlugField(null=False, unique=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs = {'slug':self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug=slugify(self.title)
+        return super().save(*args, **kwargs) 
+
+
+
+class Favorite(models.Model):
+    podcast = models.ForeignKey('Podcast', related_name='favorites', on_delete=models.CASCADE)
+    user    = models.ForeignKey('User', related_name='favorites',on_delete=models.CASCADE)
+
+

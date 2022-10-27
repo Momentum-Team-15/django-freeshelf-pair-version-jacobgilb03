@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<a href="/podcasts/favorites">View my Favorites</a>
+<a href="{% url 'favorite_podcasts' %}">View my Favorites</a>
 
 <h2>I love Podcasts</h2>
 {% for podcast in podcasts %}
@@ -10,9 +10,9 @@
         <h4>{{ podcast.description }}</h4>
         <div class="favorite_controls">
             {% if podcast in favorites %}
-                <a href="/podcasts/favorite/remove/{{podcast.id}}">[X] Remove from Favorites</a>
+                <a href="{% url 'remove_favorite' podcast.id %}">[X] Remove from Favorites</a>
             {% else %}
-                <a href="podcasts/favorites/add/{{podcast.id}}">[+] Add to Favorites</a>
+                <a href="{% url 'add_favorite' podcast.id %}">[+] Add to Favorites</a>
             {% endif %}
         </div>
     </div>

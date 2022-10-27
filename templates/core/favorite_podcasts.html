@@ -1,7 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>Favorites Page</h1>
 
-{% for podcast in podcasts %}
+{% for favorite in favorites %}
     <p>
-        <a href="/podcast/{{podcast.id}}">{{podcast.title}}</a>
+        <a href="#">{{favorite.podcast.title}}</a>
     </p>
 {% endfor %}
+
+{% endblock %}
